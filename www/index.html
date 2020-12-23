@@ -1,0 +1,94 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>正在载入...</title>
+    <style type="text/css">
+        @font-face {
+            font-family: "myFont";
+            src: url(Font.woff2);
+        }
+
+
+        body {
+            margin: 0px;
+            overflow: hidden;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body marginheight="0px" marginwidth="0px" style="background-color:rgba(0,0,0,0);">
+    <div style="text-align:center;vertical-align: middle;height:100%;width:100%;">
+        <p id="title" style="font-size:30px;color:rgba(0,0,0,0);height:40%;">清涟Elina</p>
+        <svg  style="display: inline-block;vertical-align: middle;" version="1" xmlns="http://www.w3.org/2000/svg" width="128px" height="128px" viewBox="0 0 16 16">
+            <style>
+                @keyframes rotate {
+                    0% {
+                        transform: rotate(0deg)
+                    }
+
+                    to {
+                        transform: rotate(360deg)
+                    }
+                }
+
+                @keyframes fillunfill {
+                    0% {
+                        stroke-dashoffset: 32.3
+                    }
+
+                    50% {
+                        stroke-dashoffset: 0
+                    }
+
+                    to {
+                        stroke-dashoffset: -31.9
+                    }
+                }
+
+                @keyframes rot {
+                    0% {
+                        transform: rotate(0deg)
+                    }
+
+                    to {
+                        transform: rotate(-360deg)
+                    }
+                }
+
+                @keyframes colors {
+
+                    0%,
+                    to {
+                        stroke: #58B2DC
+                    }
+                }
+            </style>
+            <g
+                style="animation-duration:1568.63ms;animation-iteration-count:infinite;animation-name:rotate;animation-timing-function:linear;transform-origin:50% 50%;width:16px;height:16px">
+                <path fill="none" d="M8 1.125A6.875 6.875 0 1 1 1.125 8" stroke-width="1.5" stroke-linecap="square"
+                    style="animation-duration:1333ms,5332ms,5332ms;animation-fill-mode:forwards;animation-iteration-count:infinite,infinite,infinite;animation-name:fillunfill,rot,colors;animation-play-state:running,running,running;animation-timing-function:cubic-bezier(.4,0,.2,1),steps(4),linear;transform-origin:50% 50%"
+                    stroke-dasharray="32.4" stroke-dashoffset="32.4" />
+            </g>
+        </svg>
+    </div>
+    <script>
+        var win = nw.Window.get();
+        win.setPosition("center");
+        var preload = function(){
+        document.getElementById("title").style.fontFamily = "myFont";
+        setTimeout(redirect, 500);
+        }
+        var redirect = function () {
+            document.location.href = "main.html";
+        };
+        setTimeout(preload, 500);</script>
+</body>
+
+</html>

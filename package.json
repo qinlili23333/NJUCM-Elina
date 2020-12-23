@@ -1,0 +1,16 @@
+{
+    "name": "清涟",
+    "main": "www/index.html",
+    "window": {
+        "title": "Elina",
+        "toolbar": false,
+        "width": 540,
+        "height": 894,
+        "resizable": false,
+        "icon": "www/icon.png",
+        "frame": false,
+        "position": "center",
+        "kiosk": false,
+        "transparent": true
+    }
+}
