@@ -12,5 +12,6 @@
         "position": "center",
         "kiosk": false,
         "transparent": true
-    }
+    },
+    "chromium-args" : "--ignore-gpu-blacklist --disable-crash-handler=true --enable-vulkan"
 }

@@ -21,62 +21,15 @@
             user-select: none;
         }
     </style>
+    <link href="material-components-web.min.css" rel="stylesheet">
+    <script src="material-components-web.min.js"></script>
 </head>
 
 <body marginheight="0px" marginwidth="0px" style="background-color:rgba(0,0,0,0);">
     <div style="text-align:center;vertical-align: middle;height:100%;width:100%;">
         <p id="title" style="font-size:30px;color:rgba(0,0,0,0);height:40%;">«Â¡∞Elina</p>
-        <svg  style="display: inline-block;vertical-align: middle;" version="1" xmlns="http://www.w3.org/2000/svg" width="128px" height="128px" viewBox="0 0 16 16">
-            <style>
-                @keyframes rotate {
-                    0% {
-                        transform: rotate(0deg)
-                    }
-
-                    to {
-                        transform: rotate(360deg)
-                    }
-                }
-
-                @keyframes fillunfill {
-                    0% {
-                        stroke-dashoffset: 32.3
-                    }
-
-                    50% {
-                        stroke-dashoffset: 0
-                    }
-
-                    to {
-                        stroke-dashoffset: -31.9
-                    }
-                }
-
-                @keyframes rot {
-                    0% {
-                        transform: rotate(0deg)
-                    }
-
-                    to {
-                        transform: rotate(-360deg)
-                    }
-                }
-
-                @keyframes colors {
-
-                    0%,
-                    to {
-                        stroke: #58B2DC
-                    }
-                }
-            </style>
-            <g
-                style="animation-duration:1568.63ms;animation-iteration-count:infinite;animation-name:rotate;animation-timing-function:linear;transform-origin:50% 50%;width:16px;height:16px">
-                <path fill="none" d="M8 1.125A6.875 6.875 0 1 1 1.125 8" stroke-width="1.5" stroke-linecap="square"
-                    style="animation-duration:1333ms,5332ms,5332ms;animation-fill-mode:forwards;animation-iteration-count:infinite,infinite,infinite;animation-name:fillunfill,rot,colors;animation-play-state:running,running,running;animation-timing-function:cubic-bezier(.4,0,.2,1),steps(4),linear;transform-origin:50% 50%"
-                    stroke-dasharray="32.4" stroke-dashoffset="32.4" />
-            </g>
-        </svg>
+        <image  style="display: inline-block;vertical-align: middle;" src="neko.webp" width="256px" height="256px">
+        </image>
     </div>
     <script>
         var win = nw.Window.get();
