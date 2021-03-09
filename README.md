@@ -32,7 +32,7 @@
 #### 清涟会影响设备性能或续航吗？  
 在surface go上，清涟在后台以500ms检测频率运行时，CPU使用率小于0.5%，对续航时间的影响只有不到0.5%甚至0.4%  
 当清涟仅仅停留在后台而不工作时，CPU使用率小于0.05%  
-但倘若设备没有一个兼容Chromium硬件加速的GPU或通过附加指令禁用了硬件加速，清涟可能消耗更多的CPU用于渲染页面  
+但倘若设备没有一个兼容Chromium硬件加速的GPU或通过附加指令禁用了硬件加速，清涟可能消耗更多的CPU用于渲染页面.你可以通过任务管理器寻找是否有gpu-process进程来判断清涟是否在硬件加速模式下,如果清涟没有默认开启硬件加速,你可以使用--ignore-gpu-blacklist指令启动清涟来尝试修正这个问题    
 
 #### 为什么我的电脑上运行清涟没有字？  
 你可能全局安装了基于LLVM的DX Compiler，Chromium系程序目前无法兼容，请参考[这个Issue](https://github.com/microsoft/DirectXShaderCompiler/issues/3527)  
