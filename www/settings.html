@@ -1,0 +1,124 @@
+0<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+  <title>>清涟Elina</title>
+  <style type="text/css">
+    @font-face {
+      font-family: "myFont";
+      src: url(Font.woff2);
+    }
+
+    html {
+      font-family: "myFont", serif;
+    }
+
+    body {
+      margin: 10px;
+      overflow: hidden;
+      background: url(bg.png) no-repeat;
+      background-size: cover;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none !important;
+      margin: 0;
+    }
+  </style>
+  <link href="material-components-web.min.css" rel="stylesheet">
+  <script src="material-components-web.min.js"></script>
+</head>
+
+<body marginheight="0px" marginwidth="0px">
+  <div id="top"
+    style="height:auto;position:fixed;top:0px;width:100%;background-color:rgba(255,255,255,0.8);-webkit-app-region:drag;"
+    oncontextmenu="return false;">
+    <H3 id="title" style="left:0px;padding:0px;margin:5px">清涟设置</H3>
+    <div id="toolbar" style="position:fixed;top:0px;right:0px;-webkit-app-region:no-drag;">
+      <image src="close.png" style="cursor:pointer" height="100%" onClick="closeSet()"></image>
+    </div>
+  </div>
+  <H4 id="tip">修改完设置，可别忘了保存呀！</H4>
+  <label style="width: 100%;padding-inline: 10px;" class="mdc-text-field mdc-text-field--outlined"
+    data-mdc-auto-init="MDCTextField">
+    <select name="checkmode" id="checkmode" style="cursor:pointer;-webkit-tap-highlight-color: transparent!important;"
+      class="mdc-text-field__input" aria-labelledby="my-label-id">
+      <option value="check204">204检测（推荐，最准）</option>
+      <option value="navi">navigator.onLine（快）</option>
+      <option value="listen">被动监听（省电）/option>
+    </select>
+    <span class="mdc-notched-outline">
+      <span class="mdc-notched-outline__leading"></span>
+      <span class="mdc-notched-outline__notch">
+        <span class="mdc-floating-label" id="my-label-id">网络连通检测模式</span>
+      </span>
+      <span class="mdc-notched-outline__trailing"></span>
+    </span>
+  </label>
+  <br>
+  <br>
+  <label style="width: 100%;padding-inline: 10px;" class="mdc-text-field mdc-text-field--outlined"
+    data-mdc-auto-init="MDCTextField">
+    <input id="checkurl" class="mdc-text-field__input" value="204URL" aria-labelledby="my-label-id">
+    <span class="mdc-notched-outline">
+      <span class="mdc-notched-outline__leading"></span>
+      <span class="mdc-notched-outline__notch">
+        <span class="mdc-floating-label" id="my-label-id">204检测地址</span>
+      </span>
+      <span class="mdc-notched-outline__trailing"></span>
+    </span>
+  </label>
+  <br>
+  <br>
+  <button onclick="saveSet();" class="mdc-button foo-button">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">保存</span>
+  </button>
+  <H4 id=log></H4>
+  <script>
+    document.getElementById('tip').style.marginTop = (document.getElementById('top').clientHeight + 10) + "px";
+    document.getElementById('toolbar').style.height = (document.getElementById('title').clientHeight + 10) + "px";
+    var win = nw.Window.get();
+    window.mdc.autoInit();
+    for (i = 0; document.getElementsByClassName("mdc-button foo-button")[i]; i++) {
+      mdc.ripple.MDCRipple.attachTo(document.getElementsByClassName("mdc-button foo-button")[i]);
+    }
+    var storage = window.localStorage;
+    var closeSet = function () {
+      win.close(true);
+    }
+    function openSettings() {
+
+    }
+    function getCurrentTime() {
+      var date = new Date();//当前时间
+      var month = zeroFill(date.getMonth() + 1);//月
+      var day = zeroFill(date.getDate());//日
+      var hour = zeroFill(date.getHours());//时
+      var minute = zeroFill(date.getMinutes());//分
+      var second = zeroFill(date.getSeconds());//秒
+
+      //当前时间
+      var curTime = date.getFullYear() + "-" + month + "-" + day
+        + " " + hour + ":" + minute + ":" + second;
+
+      return curTime;
+    }
+    function zeroFill(i) {
+      if (i >= 0 && i <= 9) {
+        return "0" + i;
+      } else {
+        return i;
+      }
+    }
+  </script>
+</body>
+
+</html>
