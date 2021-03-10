@@ -19,11 +19,37 @@
       background: url(bg.png) no-repeat;
       background-size: cover;
       -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      -khtml-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
       user-select: none;
+      box-sizing: border-box;
+    }
+
+    ::-webkit-scrollbar {
+      height: 12px;
+      width: 14px;
+      background: transparent;
+      z-index: 12;
+      overflow: visible;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      width: 10px;
+      background-color: #3d424b;
+      border-radius: 10px;
+      z-index: 12;
+      border: 4px solid rgba(0, 0, 0, 0);
+      background-clip: padding-box;
+      transition: background-color .32s ease-in-out;
+      margin: 4px;
+      min-height: 32px;
+      min-width: 32px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #4E5157;
+    }
+
+    ::-webkit-scrollbar-corner {
+      background: #202020;
     }
 
     input::-webkit-outer-spin-button,
@@ -101,7 +127,7 @@
     <span class="mdc-notched-outline">
       <span class="mdc-notched-outline__leading"></span>
       <span class="mdc-notched-outline__notch">
-        <span class="mdc-floating-label" id="my-label-id">强力模式时间间隔</span>
+        <span class="mdc-floating-label" id="my-label-id">维持时间间隔</span>
       </span>
       <span class="mdc-notched-outline__trailing"></span>
     </span>
@@ -158,10 +184,19 @@
     <span class="mdc-button__label">读取额外账号3</span>
   </button>
   <br>
-  <H4 id=log></H4>
+  <div id="newlog" style="overflow-y:scroll;height:30%;width:100%;user-select:text;">
+  </div>
+  <br>
+  <button onclick="saveLog();" class="mdc-button foo-button">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">保存日志</span>
+  </button>
+  <button onclick="clearLog();" class="mdc-button foo-button">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">清空日志</span>
+  </button>
   <script>
     var isShowWindow = true;
-
     var gui = require('nw.gui');
     var win = gui.Window.get();
     var tray = new gui.Tray({
@@ -211,7 +246,28 @@
         isShowWindow = true;
       }
     })
+    function addLog(logText) {
+      const logEle = document.createElement('P');
+      logEle.innerText = getCurrentTime() + logText;
+      document.getElementById('newlog').insertBefore(logEle, document.getElementById('newlog').firstChild)
+    }
+    function saveLog() {
+      var eleLink = document.createElement('a');
+      eleLink.download = "清涟" + getCurrentTime() + ".log";
+      eleLink.style.display = 'none';
+      // 字符内容转变成blob地址
+      var blob = new Blob([document.getElementById('newlog').innerText]);
+      eleLink.href = URL.createObjectURL(blob);
+      // 触发点击
+      document.body.appendChild(eleLink);
+      eleLink.click();
+      // 然后移除
+      document.body.removeChild(eleLink);
 
+    }
+    function clearLog() {
+      document.getElementById('newlog').innerHTML = "";
+    }
     document.getElementById('tip').style.marginTop = (document.getElementById('top').clientHeight + 10) + "px";
     document.getElementById('toolbar').style.height = (document.getElementById('title').clientHeight + 10) + "px";
     var win = nw.Window.get();
@@ -224,50 +280,50 @@
       document.getElementById("type").value = storage.getItem("type");
       document.getElementById("account").value = storage.getItem("account");
       document.getElementById("password").value = storage.getItem("password");
-      document.getElementById("log").innerText = getCurrentTime() + "从本地读取了默认账号";
+      addLog("从本地读取了默认账号");
     }
     var loadAccount1 = function () {
       document.getElementById("type").value = storage.getItem("type1");
       document.getElementById("account").value = storage.getItem("account1");
       document.getElementById("password").value = storage.getItem("password1");
-      document.getElementById("log").innerText = getCurrentTime() + "从本地读取了账号1";
+      addLog("从本地读取了账号1");
     }
     var loadAccount2 = function () {
       document.getElementById("type").value = storage.getItem("type2");
       document.getElementById("account").value = storage.getItem("account2");
       document.getElementById("password").value = storage.getItem("password2");
-      document.getElementById("log").innerText = getCurrentTime() + "从本地读取了账号2";
+      addLog("从本地读取了账号2");
     }
     var loadAccount3 = function () {
       document.getElementById("type").value = storage.getItem("type3");
       document.getElementById("account").value = storage.getItem("account3");
       document.getElementById("password").value = storage.getItem("password3");
-      document.getElementById("log").innerText = getCurrentTime() + "从本地读取了账号3";
+      addLog("从本地读取了账号3");
     }
     loadAccountD();
     var saveAccountD = function () {
       storage.setItem("type", document.getElementById("type").value);
       storage.setItem("account", document.getElementById("account").value);
       storage.setItem("password", document.getElementById("password").value);
-      document.getElementById("log").innerText = getCurrentTime() + "默认账号保存到本地";
+      addLog("默认账号保存到本地");
     }
     var saveAccount1 = function () {
       storage.setItem("type1", document.getElementById("type").value);
       storage.setItem("account1", document.getElementById("account").value);
       storage.setItem("password1", document.getElementById("password").value);
-      document.getElementById("log").innerText = getCurrentTime() + "账号1保存到本地";
+      addLog("账号1保存到本地");
     }
     var saveAccount2 = function () {
       storage.setItem("type2", document.getElementById("type").value);
       storage.setItem("account2", document.getElementById("account").value);
       storage.setItem("password2", document.getElementById("password").value);
-      document.getElementById("log").innerText = getCurrentTime() + "账号2保存到本地";
+      addLog("账号2保存到本地");
     }
     var saveAccount3 = function () {
       storage.setItem("type3", document.getElementById("type").value);
       storage.setItem("account3", document.getElementById("account").value);
       storage.setItem("password3", document.getElementById("password").value);
-      document.getElementById("log").innerText = getCurrentTime() + "账号3保存到本地";
+      addLog("账号3保存到本地");
     }
     var tryLogin = function () {
       params = {
@@ -278,33 +334,33 @@
       var httpRequest = new XMLHttpRequest();
       httpRequest.onreadystatechange = function () {
         if (httpRequest.readyState == 4) {
-          document.getElementById("log").innerText = getCurrentTime() + "登录请求被处理";
-        } else {
-          document.getElementById("log").innerText = getCurrentTime() + "登录请求被拒绝";
+          addLog("登录请求被处理");
         }
       }
       httpRequest.open('POST', 'http://10.10.100.180/api/portal/v1/login', true);
       httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       httpRequest.send(JSON.stringify(params));
-      document.getElementById("log").innerText = getCurrentTime() + "已发起登录请求";
+      addLog("已发起登录请求");
     }
     function testNet() {
       var httpRequest = new XMLHttpRequest();
       httpRequest.onreadystatechange = function check() {
-        if (httpRequest.status == 204) {
-          document.getElementById("log").innerText = getCurrentTime() + "网络已连通，登录成功";
-        } else {
-          document.getElementById("log").innerText = getCurrentTime() + "网络未连接，登录失败";
+        if (httpRequest.readyState == 4) {
+          if (httpRequest.status == 204) {
+            addLog("网络已连通，登录成功");
+          } else {
+            addLog("网络未连接，登录失败");
+          }
         }
       }
       httpRequest.open('GET', 'http://connect.rom.miui.com/generate_204', true);
       httpRequest.send(null);
-      document.getElementById("log").innerText = getCurrentTime() + "正在检测网络连通性";
+      addLog("正在检测网络连通性");
     }
     var keep = false;
     var fuckMode = function () {
       setTimeout(fuckInterval, document.getElementById("time").value);
-      document.getElementById("log").innerText = getCurrentTime() + "强力维持服务已经启动";
+      addLog("强力维持服务已经启动");
       keep = true;
     }
     function fuckInterval() {
@@ -312,12 +368,12 @@
         tryLogin();
         setTimeout(fuckInterval, document.getElementById("time").value);
       } else {
-        document.getElementById("log").innerText = getCurrentTime() + "强力维持服务已经停止";
+        addLog("强力维持服务已经停止");
       }
     }
     var checkMode = function () {
       setTimeout(checkInterval, document.getElementById("time").value)
-      document.getElementById("log").innerText = getCurrentTime() + "智能维持服务已经启动";
+      addLog("智能维持服务已经启动");
       keep = true;
     }
     function checkInterval() {
@@ -325,29 +381,31 @@
         testAndLogin();
         setTimeout(checkInterval, document.getElementById("time").value);
       } else {
-        document.getElementById("log").innerText = getCurrentTime() + "智能维持服务已经停止";
+        addLog("智能维持服务已经停止");
       }
     }
     function testAndLogin() {
       var httpRequest = new XMLHttpRequest();
       httpRequest.onreadystatechange = function check() {
-        if (httpRequest.status == 204) {
-          document.getElementById("log").innerText = getCurrentTime() + "网络已连通，无需处理";
-        } else {
-          document.getElementById("log").innerText = getCurrentTime() + "网络未连接，正在发起登录";
-          tryLogin();
+        if (httpRequest.readyState == 4) {
+          if (httpRequest.status == 204) {
+            addLog("网络已连通，无需处理");
+          } else {
+            addLog("网络未连接，正在发起登录");
+            tryLogin();
+          }
         }
       }
       httpRequest.open('GET', 'http://connect.rom.miui.com/generate_204', true);
       httpRequest.send(null);
-      document.getElementById("log").innerText = getCurrentTime() + "正在检测网络连通性";
+      addLog("正在检测网络连通性");
     }
     var stopAndRefresh = function () {
       if (keep == true) {
         keep = false;
-        document.getElementById("log").innerText = getCurrentTime() + "正在停止维持服务";
+        addLog("正在停止维持服务");
       } else {
-        document.getElementById("log").innerText = getCurrentTime() + "你不能停止一个不存在的东西";
+        addLog("你不能停止一个不存在的东西");
       }
     };
     var Tray = function () {
@@ -358,7 +416,8 @@
       win.close(true);
     }
     function openSettings() {
-      nw.Window.open("www/settings.html",{focus:true,
+      nw.Window.open("www/settings.html", {
+        focus: true,
         "width": 540,
         "height": 894,
         "resizable": false,
@@ -366,7 +425,8 @@
         "frame": false,
         "position": "center",
         "kiosk": false,
-        "transparent": true})
+        "transparent": false
+      })
     }
     function getCurrentTime() {
       var date = new Date();//当前时间
@@ -377,7 +437,7 @@
       var second = zeroFill(date.getSeconds());//秒
 
       //当前时间
-      var curTime = date.getFullYear() + "-" + month + "-" + day
+      var curTime = month + "-" + day
         + " " + hour + ":" + minute + ":" + second;
 
       return curTime;

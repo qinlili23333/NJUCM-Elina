@@ -1,4 +1,4 @@
-0<html>
+<html>
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
@@ -52,7 +52,7 @@
       class="mdc-text-field__input" aria-labelledby="my-label-id">
       <option value="check204">204检测（推荐，最准）</option>
       <option value="navi">navigator.onLine（快）</option>
-      <option value="listen">被动监听（省电）/option>
+      <option disabled value="listen">[开发中暂未开放]被动监听（省电）</option>
     </select>
     <span class="mdc-notched-outline">
       <span class="mdc-notched-outline__leading"></span>
@@ -66,7 +66,7 @@
   <br>
   <label style="width: 100%;padding-inline: 10px;" class="mdc-text-field mdc-text-field--outlined"
     data-mdc-auto-init="MDCTextField">
-    <input id="checkurl" class="mdc-text-field__input" value="204URL" aria-labelledby="my-label-id">
+    <input id="checkurl" class="mdc-text-field__input" value="http://connect.rom.miui.com/generate_204" aria-labelledby="my-label-id">
     <span class="mdc-notched-outline">
       <span class="mdc-notched-outline__leading"></span>
       <span class="mdc-notched-outline__notch">
@@ -94,7 +94,7 @@
     var closeSet = function () {
       win.close(true);
     }
-    function openSettings() {
+    function saveSet() {
 
     }
     function getCurrentTime() {
