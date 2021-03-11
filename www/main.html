@@ -127,10 +127,22 @@
     <span class="mdc-notched-outline">
       <span class="mdc-notched-outline__leading"></span>
       <span class="mdc-notched-outline__notch">
-        <span class="mdc-floating-label" id="my-label-id">维持时间间隔</span>
+        <span class="mdc-floating-label" id="my-label-id">维持时间间隔（毫秒）</span>
       </span>
       <span class="mdc-notched-outline__trailing"></span>
     </span>
+    <button onclick="set500();" class="mdc-button foo-button">
+      <div class="mdc-button__ripple"></div>
+      <span class="mdc-button__label">0.5秒</span>
+    </button>
+    <button onclick="set5s();" class="mdc-button foo-button">
+      <div class="mdc-button__ripple"></div>
+      <span class="mdc-button__label">5秒</span>
+    </button>
+    <button onclick="set30s();" class="mdc-button foo-button">
+      <div class="mdc-button__ripple"></div>
+      <span class="mdc-button__label">半分钟</span>
+    </button>
   </label>
   <br>
   <button onclick="tryLogin();testNet();" class="mdc-button foo-button">
@@ -341,6 +353,15 @@
       httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       httpRequest.send(JSON.stringify(params));
       addLog("已发起登录请求");
+    }
+    function set500(){
+      document.getElementById("time").value=500;
+    }
+    function set5s(){
+      document.getElementById("time").value=5000;
+    }
+    function set30s(){
+      document.getElementById("time").value=30000;
     }
     function testNet() {
       var httpRequest = new XMLHttpRequest();
