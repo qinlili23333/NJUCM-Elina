@@ -51,7 +51,7 @@
     <select name="checkmode" id="checkmode" style="cursor:pointer;-webkit-tap-highlight-color: transparent!important;"
       class="mdc-text-field__input" aria-labelledby="my-label-id">
       <option value="check204">204检测（推荐，最准）</option>
-      <option value="navi">navigator.onLine（快）</option>
+      <option disabled value="navi">[开发中暂未开放]navigator.onLine（快）</option>
       <option disabled value="listen">[开发中暂未开放]被动监听（省电）</option>
     </select>
     <span class="mdc-notched-outline">
@@ -66,7 +66,8 @@
   <br>
   <label style="width: 100%;padding-inline: 10px;" class="mdc-text-field mdc-text-field--outlined"
     data-mdc-auto-init="MDCTextField">
-    <input id="checkurl" class="mdc-text-field__input" value="http://connect.rom.miui.com/generate_204" aria-labelledby="my-label-id">
+    <input id="checkurl" class="mdc-text-field__input" value="http://connect.rom.miui.com/generate_204"
+      aria-labelledby="my-label-id">
     <span class="mdc-notched-outline">
       <span class="mdc-notched-outline__leading"></span>
       <span class="mdc-notched-outline__notch">
@@ -74,12 +75,24 @@
       </span>
       <span class="mdc-notched-outline__trailing"></span>
     </span>
+    <button onclick="urlMIUI();" class="mdc-button foo-button">
+      <div class="mdc-button__ripple"></div>
+      <span class="mdc-button__label">MIUI</span>
+    </button>
+  <button onclick="urlQualcomm();" class="mdc-button foo-button">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">高通</span>
+  </button>
+  <button onclick="urlQinlili();" class="mdc-button foo-button">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">琴梨梨</span>
+  </button>
   </label>
   <br>
   <br>
   <button onclick="saveSet();" class="mdc-button foo-button">
     <div class="mdc-button__ripple"></div>
-    <span class="mdc-button__label">保存</span>
+    <span class="mdc-button__label">保存并关闭</span>
   </button>
   <H4 id=log></H4>
   <script>
@@ -94,8 +107,21 @@
     var closeSet = function () {
       win.close(true);
     }
+    document.getElementById("checkmode").value=storage.getItem("checkmode");
+    document.getElementById("checkurl").value=storage.getItem("checkurl");
     function saveSet() {
-
+      storage.setItem("checkmode", document.getElementById("checkmode").value);
+      storage.setItem("checkurl", document.getElementById("checkurl").value);
+      closeSet();
+    }
+    function urlMIUI (){
+      document.getElementById("checkurl").value="http://connect.rom.miui.com/generate_204";
+    }
+    function urlQualcomm (){
+      document.getElementById("checkurl").value="https://www.qualcomm.cn/generate_204";
+    }
+    function urlQinlili (){
+      document.getElementById("checkurl").value="https://204.qinlili.bid/elina";
     }
     function getCurrentTime() {
       var date = new Date();//当前时间

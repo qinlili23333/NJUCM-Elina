@@ -353,7 +353,7 @@
           }
         }
       }
-      httpRequest.open('GET', 'http://connect.rom.miui.com/generate_204', true);
+      httpRequest.open('GET', storage.getItem("checkurl"), true);
       httpRequest.send(null);
       addLog("正在检测网络连通性");
     }
@@ -396,7 +396,7 @@
           }
         }
       }
-      httpRequest.open('GET', 'http://connect.rom.miui.com/generate_204', true);
+      httpRequest.open('GET', storage.getItem("checkurl"), true);
       httpRequest.send(null);
       addLog("正在检测网络连通性");
     }
