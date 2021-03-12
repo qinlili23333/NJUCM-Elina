@@ -94,6 +94,10 @@
     <div class="mdc-button__ripple"></div>
     <span class="mdc-button__label">保存并关闭</span>
   </button>
+  <button onclick="build204();" class="mdc-button foo-button">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">自建204检测地址</span>
+  </button>
   <H4 id=log></H4>
   <script>
     document.getElementById('tip').style.marginTop = (document.getElementById('top').clientHeight + 10) + "px";
@@ -103,6 +107,7 @@
     for (i = 0; document.getElementsByClassName("mdc-button foo-button")[i]; i++) {
       mdc.ripple.MDCRipple.attachTo(document.getElementsByClassName("mdc-button foo-button")[i]);
     }
+    let gui = require('nw.gui');
     var storage = window.localStorage;
     var closeSet = function () {
       win.close(true);
@@ -113,6 +118,9 @@
       storage.setItem("checkmode", document.getElementById("checkmode").value);
       storage.setItem("checkurl", document.getElementById("checkurl").value);
       closeSet();
+    }
+    function build204(){
+      gui.Shell.openExternal("https://zhuanlan.zhihu.com/p/356409868");
     }
     function urlMIUI (){
       document.getElementById("checkurl").value="http://connect.rom.miui.com/generate_204";
